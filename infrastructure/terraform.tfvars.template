@@ -1,0 +1,7 @@
+#scw_default_org_id=""
+#scw_secret_key=""
+#scw_access_key=""
+scaleway_region=""
+scaleway_zone=""
+kubernetes_version = "1.24.5"
+dns_zone=""
