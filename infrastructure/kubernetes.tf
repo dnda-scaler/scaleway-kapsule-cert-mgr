@@ -1,7 +1,7 @@
 resource "scaleway_k8s_cluster" "clusterk8s" {
-  name    = "clusterk8s-test"
-  version = var.kubernetes_version 
-  cni     = "cilium"
+  name                        = "clusterk8s-test"
+  version                     = var.kubernetes_version
+  cni                         = "cilium"
   delete_additional_resources = true
 }
 
@@ -27,7 +27,7 @@ provider "kubernetes" {
   host  = null_resource.kubeconfig.triggers.host
   token = null_resource.kubeconfig.triggers.token
   cluster_ca_certificate = base64decode(
-  null_resource.kubeconfig.triggers.cluster_ca_certificate
+    null_resource.kubeconfig.triggers.cluster_ca_certificate
   )
 }
 
@@ -42,3 +42,4 @@ resource "kubernetes_secret_v1" "scaleway_credentials" {
     "SCW_SECRET_KEY" = var.scw_secret_key
   }
 }
+

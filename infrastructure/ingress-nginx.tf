@@ -8,28 +8,28 @@ resource "helm_release" "nginx_ingress" {
   namespace = "kube-system"
 
   repository = "https://kubernetes.github.io/ingress-nginx"
-  chart = "ingress-nginx"
+  chart      = "ingress-nginx"
 
 
   // enable proxy protocol to get client ip addr instead of loadbalancer one
   set {
-    name = "controller.config.use-proxy-protocol"
+    name  = "controller.config.use-proxy-protocol"
     value = "true"
   }
   set {
-    name = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/scw-loadbalancer-proxy-protocol-v2"
+    name  = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/scw-loadbalancer-proxy-protocol-v2"
     value = "true"
   }
 
   // indicates in which zone to create the loadbalancer
   set {
-    name = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/scw-loadbalancer-zone"
+    name  = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/scw-loadbalancer-zone"
     value = var.scaleway_zone
   }
 
   // enable to avoid node forwarding
   set {
-    name = "controller.service.externalTrafficPolicy"
+    name  = "controller.service.externalTrafficPolicy"
     value = "Local"
   }
 
