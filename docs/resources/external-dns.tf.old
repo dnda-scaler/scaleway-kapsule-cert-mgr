@@ -1,3 +1,9 @@
+/**
+* External DNS for scaleway provider is still in beta so we will use terraform to create the record 
+* and attach it to the Load Balancer IP
+* This example will be used if external dns is production ready
+**/
+
 // Helm Chart that will be used to create External DNS Resources
 resource "helm_release" "external_dns" {
   name = "external-dns"

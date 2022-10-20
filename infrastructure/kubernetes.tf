@@ -1,5 +1,5 @@
 resource "scaleway_k8s_cluster" "clusterk8s" {
-  name                        = "clusterk8s-test"
+  name                        = "clusterk8s-cert-dns-integration"
   version                     = var.kubernetes_version
   cni                         = "cilium"
   delete_additional_resources = true
