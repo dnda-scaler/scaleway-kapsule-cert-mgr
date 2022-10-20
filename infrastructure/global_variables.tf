@@ -31,3 +31,7 @@ variable "kube_config_output" {
   type    = string
   default = "~/.kube/config"
 }
+
+variable "allowed_cidr" {
+  type=list(string)
+}

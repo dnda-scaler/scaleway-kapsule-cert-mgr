@@ -30,16 +30,3 @@ provider "kubernetes" {
     null_resource.kubeconfig.triggers.cluster_ca_certificate
   )
 }
-
-//Here we create the secret that will be used by external DNS to create 
-// DNS Records
-resource "kubernetes_secret_v1" "scaleway_credentials" {
-  metadata {
-    name = "scaleway-credentials"
-  }
-  data = {
-    "SCW_ACCESS_KEY" = var.scw_access_key
-    "SCW_SECRET_KEY" = var.scw_secret_key
-  }
-}
-

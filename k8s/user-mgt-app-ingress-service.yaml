@@ -1,0 +1,36 @@
+# This ingress expose our application to the outside
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: 'nginx'
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/issuer: letsencrypt-staging  # Cert issuer declaration production rate requests being limited it is recomended to test your dev on staging before
+    #cert-manager.io/issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+    # ADD ANNOTATION
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - host: user-management.scaleway.damiennda.com  # This host must be the same than the one written in terraform variable user_mgt_app_dns with a helm chart replacement should be done in a safer way using CI/CD
+      http:
+        paths:
+          - path: /api/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name:  user-mgt-api-cluster-ip-service
+                port:
+                  number: 5000
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: user-mgt-web-app-cluster-ip-service
+                port:
+                  number: 80
+  tls:
+  - hosts:
+    -  user-management.scaleway.damiennda.com
+    secretName: user-management-scaleway-damiennda-com-tls

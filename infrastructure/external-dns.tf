@@ -15,8 +15,9 @@ resource "helm_release" "external_dns" {
   }
   set {
     name  = "domainFilters[0]"
-    value = "scaleway"
+    value = var.dns_zone
   }
+  //External DNS Helm CHart does not seem to read data from secret
   set {
     name  = "scaleway.scwAccessKey"
     value = var.scw_access_key
