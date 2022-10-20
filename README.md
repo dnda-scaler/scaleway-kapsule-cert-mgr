@@ -13,6 +13,7 @@ The yaml file for the application deployment can be found [here](./k8s/user-mgt-
 5. The Kubernetes Dashboard can be used to see what happened within your cluster (POD Allocation) by using kubetcl proxy then
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:https/proxy
 
+![Archi Description](./docs/resources/images/archi_description.png)
 
 **NB: External DNS for scaleway provider is still in beta so we will use terraform to create the record**
 
